@@ -36,6 +36,10 @@ const Authentication = () => {
                 localStorage.setItem("loginToken", result.token);
                 navigate('/home');
             }
+            // else
+            // {
+            //     setAuthenticationData({...setAuthenticationData, authenticationError: result.error});
+            // }
         })
         .catch(error => {
             setAuthenticationData({...setAuthenticationData, authenticationError: error.errorMessage});

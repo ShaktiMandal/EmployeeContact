@@ -33,8 +33,7 @@ const formLevelValidation = () => {
     {
         let errorMessages = "";
         Object.keys(data).forEach(( item, index) => {
-          if(data[item].length > 0)
-          {
+     
             if(index === 0)
             {
                 errorMessages = fieldValidation(item, data[item]);
@@ -47,7 +46,7 @@ const formLevelValidation = () => {
                 errorMessages += "\n" + message;
               }
             }  
-          }     
+               
         });
 
         console.log("form validation", errorMessages);
@@ -57,6 +56,10 @@ const formLevelValidation = () => {
 
 const getErrorMsgForEmail = (email) => {
   var regexp= /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+    if(email.length === 0 || email === undefined)
+    {
+      return "Please enter email id"
+    }
     if(regexp.test(email))
     {
         return "";
@@ -68,6 +71,11 @@ const getErrorMsgForEmail = (email) => {
 const getErrorMsgForPhoneNo = (phoneNo) => {
 
   var regexp= /^(\+\d{1,3}[- ]?)?\d{10}$/;
+
+    if(phoneNo.length === 0 || phoneNo === undefined)
+    {
+      return "Please enter mobile number";
+    }
     if(regexp.test(phoneNo))
     {
         return "";
@@ -78,6 +86,11 @@ const getErrorMsgForPhoneNo = (phoneNo) => {
 
 const getErrorMsgForAdharNo = (adharNo) => {
     var regexp= /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+
+    if(adharNo.length === 0 || adharNo === undefined)
+    {
+      return "Please enter adhaar number";
+    }
     if(regexp.test(adharNo))
     {
         return "";
@@ -88,6 +101,10 @@ const getErrorMsgForAdharNo = (adharNo) => {
 
 const getErrorMsgForPassword = (password) => {
 
+    if(password.length === 0 || password === undefined)
+    {
+      return "Please enter password";
+    }
     const isWhitespace = /^(?=.*\s)/;
         if (isWhitespace.test(password)) {
           return "Password must not contain Whitespaces.";
@@ -125,7 +142,7 @@ const getErrorMsgForPassword = (password) => {
 
 const getErrorMsgForOther = (value, fieldName) => {
 
-    return value.length  > 0 ? "" : `${fieldName} Value should not be empty`;
+    return value.length > 0 || value === undefined ? "" : `${fieldName} Value should not be empty`;
 }
 
 const fieldValidation = fieldLevelValidation();
