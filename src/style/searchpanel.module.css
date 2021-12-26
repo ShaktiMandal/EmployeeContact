@@ -1,0 +1,22 @@
+.searchpanel
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.searchpanel input{
+    width: 80%;
+    padding: 10px; 
+    border-radius: 25px;
+    border: none;
+    outline: none;
+}
+
+@media screen and (min-width: 1000px)
+{
+    .searchpanel input{
+        width: 40%;
+    }
+}

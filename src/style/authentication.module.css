@@ -1,0 +1,65 @@
+.logInform
+{
+    position: relative;
+    top: 15%;
+    left: 35%;
+    display: grid;
+    place-items: center;
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px rgb(78, 75, 75);
+    color: var(--clr-form-bg);
+}
+
+.logInform div{
+    width: 80%;
+}
+
+.logInform h5{
+    margin-bottom: 10px;
+}
+
+.logInBtn
+{
+    margin: auto;
+    width: 200px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: var(--clr-red);
+}
+
+.logInBtn:hover{
+    cursor: pointer;
+}
+
+.loginbtndiv
+{
+    display: grid;
+    place-items: center;
+}
+
+.HyperLinkItem
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+@media screen and (max-width: 800px)
+{
+    .logInform
+    {
+        width: 70%;
+        left: 15%;
+    }
+
+    .logInform div{
+        width: 90%;
+    }
+    
+}

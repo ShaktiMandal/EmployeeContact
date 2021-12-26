@@ -1,0 +1,32 @@
+.group
+{
+    background-color: lightgray;
+    display: grid;
+    place-items: center;
+    height: 50%;
+    width: 80%;
+    position: relative;
+    top: 30%;
+    left: 10%;
+}
+
+.closeBtn
+{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.closeBtn:hover{
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1000px)
+{
+    .group{
+        width:30%;
+        left: 35%;
+    }
+}
