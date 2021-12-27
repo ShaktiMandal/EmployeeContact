@@ -156,13 +156,12 @@ const Groups = (props) => {
     }
 
     return (
-        <div> 
-            <SearchPanel onSearch = {onSearch}/>
+        <div className={classes.groupSection}> 
+            { groups.length > 0  ? <SearchPanel onSearch = {onSearch}/> : null}
             <div className={classes.displayGroup}> 
             {
 
                 groups.length > 0 ?
-
                 <ul className={classes.usergroups}>
                                     
                     {

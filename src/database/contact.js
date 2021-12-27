@@ -15,6 +15,29 @@ var contactDB = (function() {
             return getContacts(grpId).filter(contact =>  contact.id === contactId);
         }
 
+        const searchContact = (searchValue) => {
+
+            let result = [];
+            let groups = groupDB().getGroups();
+            console.log("In search db", groups)
+            groups.forEach(element => {
+                if(element.contacts !== undefined && element.contacts.length > 0)
+                {
+                    if(searchValue.length > 0)
+                    {
+                        result = result.concat(element.contacts.filter(contact => contact.email.includes(searchValue) || contact.phoneNumber.includes(searchValue) ));
+                    }
+                    else
+                    {
+                        result = result.concat(...element.contacts);
+                    }
+                }
+                
+            });
+            console.log("In search db result", result);
+            return result;
+        }
+
         const addContact = function(grpId, contactDetails) {  
             contactDetails.id = createUUID();          
             let groups = groupDB().getGroups();
@@ -56,7 +79,8 @@ var contactDB = (function() {
             getContact,
             getContacts,
             updateContact,
-            removeContact        
+            removeContact,
+            searchContact        
         }
     }
 }

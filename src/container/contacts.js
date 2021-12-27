@@ -3,13 +3,12 @@ import Conatct from '../components/contactitem';
 import SearchPanel from '../components/searchpanel';
 import classes from '../style/groups.module.css';
 import PopUp from '../components/popup';
-import { deleteConatctApi, updateContactApi } from '../proxy/serviceproxy';
+import { deleteConatctApi, updateContactApi, searchContactApi } from '../proxy/serviceproxy';
 import ConatctItem from '../components/contactitem';
 
 
 const Contacts = () => {
 
-    let items = [];
     const initializeContacts = {
         email: "",
         phoneNumber: "",
@@ -18,10 +17,12 @@ const Contacts = () => {
         error: ""
     }
 
+    let isUserSearching = false;
     let conatactRef = React.useRef(null);
     const[contactDetails, setContactDetails] = useState(initializeContacts);
     const [contacts, setContacts] = useState([]);
     const [selectedIndex, setIndex] = useState(-1);
+    const [userSearched, setUserSearched] = useState(false);
 
     useEffect(()=> {
 
@@ -40,12 +41,20 @@ const Contacts = () => {
             setContacts(contacts);
 
         }
+        
         conatactRef.current.style.display = "none";
         
     }, [])
 
     const onSearch = (event) => {
-        
+        setUserSearched(true);
+        searchContactApi(event.target.value)
+        .then(result => {
+            setContacts(result.contacts);
+        })
+        .catch(error => {
+            setContactDetails({...contactDetails, error});
+        });
     }
 
     const onRemoveContact = (index) => {
@@ -66,6 +75,10 @@ const Contacts = () => {
                   }
                 });
 
+                if(contacts.length === 0)
+                {
+                    setUserSearched(false);
+                }
                 setContacts(contacts);
             }
             else
@@ -134,7 +147,7 @@ const Contacts = () => {
 
     return (
         <div>
-            <SearchPanel onSearch = {onSearch}/>
+            {contacts.length > 0 || userSearched ? <SearchPanel onSearch = {onSearch}/> : null }
             <div className={classes.displayGroup}> 
                 {
                     contacts.length > 0 ?

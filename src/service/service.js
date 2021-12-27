@@ -171,6 +171,27 @@ const deleteConatct = (grpId, contactId) => {
     }
 }
 
+const searchContacts = (searchValue) => {
+    let searchedResult = contactDB().searchContact(searchValue);
+    if(searchedResult.length > 0)
+    {
+        return{
+            success: true, 
+            contacts: searchedResult,
+            error: ""
+        }
+    }
+    else
+    {
+        return{
+            success: false,
+            contacts: [],
+            error: "No search result found"
+        }
+    }
+}
+
+
 export {
     registerUser, 
     signinUser, 
@@ -182,5 +203,6 @@ export {
     getUserGroups, 
     getUserDetails,
     deleteConatct,
-    deleteGroup
+    deleteGroup,
+    searchContacts
 };

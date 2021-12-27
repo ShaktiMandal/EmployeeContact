@@ -27,6 +27,11 @@
     list-style: none;
 }
 
+.groupSection
+{
+    height: 100vh;
+}
+
 
 @media screen and (max-width: 800px)
 {

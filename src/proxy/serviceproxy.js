@@ -9,6 +9,7 @@ import {
     getEmployeeContact, 
     getUserGroups,
     deleteConatct,
+    searchContacts,
     deleteGroup} from '../service/service'
 import {fieldValidation, formValidation } from '../validator'
 
@@ -173,6 +174,7 @@ const updateContactApi = (groupId, contactDetails) => {
     })
 }
 
+
 const deleteConatctApi = (grpId, contactId) => {
 
     return new Promise((resolve, reject) => {
@@ -185,6 +187,12 @@ const getConactsApi = (grpId) => {
 
     return new Promise((resolve, reject) => {
         resolve(getEmployeeContact(grpId))
+    })
+}
+
+const searchContactApi = (searchValue) => {
+    return new Promise((resolve, reject) => { 
+        resolve(searchContacts(searchValue));
     })
 }
 
@@ -231,5 +239,6 @@ export {
     deleteConatctApi,
     deleteGroupApi,
     getUserApi,
-    getGroupsApi
+    getGroupsApi,
+    searchContactApi
 }
