@@ -12,8 +12,7 @@ const Registration = (props) => {
             <div>                           
                 {props.errorMsg == undefined || props.errorMsg.length === 0 ? null : <h4 style={{textAlign:"center", color: "red"}}>{props.errorMsg}</h4>}
             </div>
-            <div className={classes.inputdiv}>
-                <h5>Email</h5>
+            <div className={classes.inputdiv}>             
                 <Input type="email"   
                 name="email"   
                 id = {props.emailId}
@@ -25,7 +24,6 @@ const Registration = (props) => {
             
             </div>
             <div className={classes.inputdiv }>
-                <h5>Password</h5>
                 <Input type="password"   
                 name="password"                             
                 id = {props.passwordId}
@@ -36,7 +34,6 @@ const Registration = (props) => {
                 />
             </div>
             <div className={classes.inputdiv }>
-                <h5>Frist Name</h5>
                 <Input type="text"  
                 name="firstName"                              
                 id = {props.firstNameId}
@@ -47,7 +44,6 @@ const Registration = (props) => {
                 />
             </div>
             <div className={classes.inputdiv }>
-                <h5>Last Name</h5>
                 <Input type="text"    
                     name="lastName"                            
                 id = {props.lastNameId}
@@ -58,7 +54,6 @@ const Registration = (props) => {
                 />
             </div>
             <div className={classes.inputdiv }>
-                <h5>Adhar No</h5>
                 <Input type="text" 
                 name="adharNo"                               
                 id = {props.adharId}

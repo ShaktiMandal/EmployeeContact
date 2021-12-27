@@ -9,10 +9,9 @@ const SignIn = (props) => {
                 <div className={classes.logInform}> 
                     <h3>Sign in</h3>
                     <div>                           
-                        {props.errorMsg == undefined || props.errorMsg.length === 0 ? null : <h4 style={{textAlign:"center", color: "red"}}>{props.errorMsg}</h4>}
+                        {props.errorMsg == undefined || props.errorMsg.length === 0 ? null : <h4>{props.errorMsg}</h4>}
                     </div>
-                    <div className={classes.inputdiv}>
-                        <h5>Email</h5>
+                    <div className={classes.inputdiv}>                     
                         <Input type="email"      
                         id = {props.emailId}
                         name="email"
@@ -23,8 +22,7 @@ const SignIn = (props) => {
                         />
                        
                     </div>
-                    <div className={classes.inputdiv }>
-                        <h5>Password</h5>
+                    <div className={classes.inputdiv }>                       
                         <Input type="password"    
                                  name="password"                         
                         id = {props.passwordId}
@@ -37,12 +35,8 @@ const SignIn = (props) => {
                     </div>
                     <div className={classes.HyperLinkItem}>
                         <div className={classes.SignUpLink}>
-                            <Hyperlink className={classes.SignUp} LinkedTo='/register'> Sign up </Hyperlink>
+                            Don't have accunt ?<Hyperlink className={classes.SignUp} LinkedTo='/register'> Sign up </Hyperlink>
                         </div>
-                        <div className={classes.ForgotPasswordLink}>
-                            <Hyperlink LinkedTo=''>Forgot Password?</Hyperlink>
-                        </div>
-                       
                     </div>      
                     <div className={classes.loginbtndiv}>
                         <button className={classes.logInBtn}                   

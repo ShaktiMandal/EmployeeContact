@@ -1,16 +1,36 @@
 .InputStyle
 {
-    width: 100%;
+    width: 90%;
     height: 30px;
-    border: none;
-    left: 0px;
-    top: 0px;
     outline: none;
-    border: none;
-
 }
 
- .InputStyle ~ input::placeholder
+/* input{
+    background: none;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    padding: 10px;
+    outline: none;
+    transition: 0.25s;
+} */
+
+input{
+    background: none;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    padding-left: 10px;
+    outline: none;
+    transition: 0.25s;
+    text-align: center;
+    color: white
+}
+
+input:focus{
+    width: 100%;
+    border-color: #2ecc71; 
+}
+
+.InputStyle ~ input::placeholder
 {
     display: none;
 }
