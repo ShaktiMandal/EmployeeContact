@@ -7,7 +7,7 @@ var contactDB = (function() {
     {
         const getContacts = function(grpId) {  
 
-            return groupDB().getGroup(grpId)[0].Contacts;
+            return groupDB().getGroup(grpId)[0].contacts;
         }
 
         const getContact = function(grpId, contactId)
@@ -17,22 +17,39 @@ var contactDB = (function() {
 
         const addContact = function(grpId, contactDetails) {  
             contactDetails.id = createUUID();          
-            let group = groupDB().getGroup(grpId);
-            return group.contacts.push(contactDetails);
+            let groups = groupDB().getGroups();
+            let matchIndex = groups.findIndex(item => item.groupId === grpId);
+            groups[matchIndex].contacts.push(contactDetails);
+            if(localStorage.getItem("Groups"))
+            {
+                localStorage.setItem("Groups", JSON.stringify(groups));
+            }
         }
 
         const updateContact = function(grpId, contactDetails) {
 
-            let contacts = groupDB().getGroup(grpId);
-            let contact = contacts.filter(item => item.id === contactDetails.id);
-            contact[0].phoneNumber = contactDetails.phoneNumber;
-            contact[0].email = contactDetails.email;
+            let groups = groupDB().getGroups();
+            let matchIndex = groups.findIndex(item => item.groupId === grpId);
+            let contactINdex = groups[matchIndex].contacts.findIndex(item => item.id === contactDetails.id);
+
+            groups[matchIndex].contacts[contactINdex].phoneNumber = contactDetails.phoneNumber;
+            groups[matchIndex].contacts[contactINdex].email = contactDetails.email;
+
+            if(localStorage.getItem("Groups"))
+            {
+                localStorage.setItem("Groups", JSON.stringify(groups));
+            }
         }
 
-        const removeContact = function(groupId, contactId) {     
-            let group = groupDB().getGroup(groupId);;
-            let contacts = group[0].contacts;
-            group[0].Contacts = contacts.filter(contact => contact.id !== contactId)
+        const removeContact = function(groupId, contactId) {   
+            let groups = groupDB().getGroups(groupId);
+            let matchIndex = groups.findIndex(item => item.groupId === groupId);
+            groups[matchIndex].contacts = groups[matchIndex].contacts.filter(contact => contact.id !== contactId);
+
+            if(localStorage.getItem("Groups"))
+            {
+                localStorage.setItem("Groups", JSON.stringify(groups));
+            }
         }
         return {
             addContact,

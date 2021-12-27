@@ -60,14 +60,7 @@ const createGroup = (grpDetails) => {
 }
 
 const getUserGroups = (email) => {
-    
-    // let userGroups;
-    // let matchedUser = users.find(item =>  item.email === email);
-    // if(matchedUser.length > 0)
-    // {
-    //     userGroups = groups.filter(group => group.email === email);
-    // }
-
+   
     let userGroups = groupDB().getGroups(email);
     if(userGroups.length > 0)
     {
@@ -114,12 +107,12 @@ const deleteGroup = (grpId) => {
 
     return {
         success : true, 
-        groups,
+        userGroups: groups,
         errorMessage: ""
     }
 }
 
-const createContact = (groupId, contactDetails) => {
+const createContact = (contactDetails) => {
 
     // let group = groups.filter(item => item.groupId === groupId);
 
@@ -140,9 +133,9 @@ const createContact = (groupId, contactDetails) => {
     //     errorMessage: "Unable to create conatct"
     // }
 
-    contactDB().addContact(groupId, contactDetails)
+    contactDB().addContact(contactDetails.groupId, contactDetails)
     return {
-        groups: groupDB().getGroups(groupId),
+        groups: groupDB().getGroups(contactDetails.groupId),
         success: true,
         errorMesssage: ""
     }
@@ -234,8 +227,14 @@ const deleteConatct = (grpId, contactId) => {
     //     contacts,
     //     errorMessage: ""
     // }
-
+    let currentCount = contactDB().getContacts(grpId).length;
     contactDB().removeContact(grpId, contactId);
+    let updatedCount = contactDB().getContacts(grpId).length;
+    return {
+        success : currentCount - updatedCount === 1 ? true : false, 
+        updatedGroup: groupDB().getGroups(grpId),
+        errorMessage: currentCount - updatedCount === 1 ? "" : "Unable to remove contact"
+    }
 }
 
 export {

@@ -3,41 +3,95 @@ import Conatct from '../components/contactitem';
 import SearchPanel from '../components/searchpanel';
 import classes from '../style/groups.module.css';
 import PopUp from '../components/popup';
-import { AppContext } from './appContext';
+import { deleteConatctApi, updateContactApi } from '../proxy/serviceproxy';
+import ConatctItem from '../components/contactitem';
 
 
 const Contacts = () => {
 
     let items = [];
-    const {context} = useContext(AppContext);
-    let conatactRef = React.useRef(null);
-    const[contactDetails, setContactDetails] = useState({
+    const initializeContacts = {
         email: "",
-        phoneNumber: ""
-    });
+        phoneNumber: "",
+        groupId: "",
+        id: "",
+        error: ""
+    }
 
-    useEffect((props)=> {
+    let conatactRef = React.useRef(null);
+    const[contactDetails, setContactDetails] = useState(initializeContacts);
+    const [contacts, setContacts] = useState([]);
+    const [selectedIndex, setIndex] = useState(-1);
+
+    useEffect(()=> {
+
+        if(localStorage.getItem("Groups"))
+        {
+            let contacts = [];
+            let groups = JSON.parse(localStorage.getItem("Groups") || "[]");
+            groups.forEach(group => {
+                if(group.contacts !== undefined && group.contacts.length > 0)
+                {
+                    contacts = contacts.concat(...group.contacts);
+                }
+                
+            });
+
+            setContacts(contacts);
+
+        }
         conatactRef.current.style.display = "none";
-        console.log("Printing context", context);
+        
     }, [])
 
     const onSearch = (event) => {
         
     }
 
-    const onRemoveContact = () => {
-        alert("Remove");
+    const onRemoveContact = (index) => {
+        deleteConatctApi(contacts[index].groupId, contacts[index].id)
+        .then(result => {
+
+        })
+        .catch(error => {
+
+        })
     }
 
-    const onConatctEdit = () => {
-        conatactRef.current.style.display = "block";
+    const onConatctEdit = (index) => {
+
+        setContactDetails({...contactDetails, 
+            email: contacts[index].email, 
+            phoneNumber: contacts[index].phoneNumber});
+        setIndex(index);
+        conatactRef.current.style.display = "block";        
     }
 
     const onSubmit = () => {
-        conatactRef.current.style.display = "none";
+        updateContactApi(contacts[selectedIndex].groupId, 
+            {
+                id: contacts[selectedIndex].id,
+                email: contactDetails.email, 
+                phoneNumber: contactDetails.phoneNumber
+            })
+        .then(result => {
+            if(result.success)
+            {
+
+            }
+            else
+            {
+
+            }
+        })
+        .catch(error => {
+
+        })
+        .finally(()=> conatactRef.current.style.display = "none")        
     }
 
     const onCloseButton =() => {
+        setContactDetails(initializeContacts);
         conatactRef.current.style.display = "none";
     }
 
@@ -45,38 +99,49 @@ const Contacts = () => {
         setContactDetails({...contactDetails, [event.target.name]: event.target.value});
     }
 
-    items.push(<Conatct onRemoveContact={onRemoveContact} onConatctEdit ={onConatctEdit} />);
-    items.push(<Conatct onRemoveContact={onRemoveContact} onConatctEdit ={onConatctEdit} />);
-    items.push(<Conatct onRemoveContact={onRemoveContact} onConatctEdit ={onConatctEdit} />);
-    items.push(<Conatct onRemoveContact={onRemoveContact} onConatctEdit ={onConatctEdit} />);
-
     return (
         <div>
             <SearchPanel onSearch = {onSearch}/>
-            <div className={classes.displayGroup}>                
-                <ul style={{margin: "0px"}}>
+            <div className={classes.displayGroup}> 
+                {
+                    contacts.length > 0 ?
+                    <ul className={classes.usergroups}>                                    
                     {
-                        items.map(item => item)
-                    }
-                </ul>
+                        contacts.map((contact, index) => {
+                            return(
+                            <li>
+                                <ConatctItem 
+                                email = {contact.email}
+                                phoneNumber = {contact.phoneNumber}
+                                onConatctEdit={()=> onConatctEdit.call(null, index)}
+                                onRemoveGroup = {()=> onRemoveContact.call(null, index)}
+                                />
+                            </li>
+                            )
+                        })
+                    }              
+                                                    
+                    </ul> : <>User Dont have any contact</>
+                }               
+                
             </div>
             <div className={classes.createContact} ref={conatactRef}>
                 
                         <PopUp 
-                            heading = "Add contact"
+                            heading = "Edit contact"
                             firstHeading = "Email"
                             secondHeading = "Phone Number"
                             firstInputType= "email"
                             secondInputType = "tel"
                             firsInputId = "emailId"              
                             secondInputId = "phoneNumberId"
-                            secondInputName = "email"
-                            firstInputName = "phoneNumber"
+                            firstInputName = "email"
+                            secondInputName = "phoneNumber"
                             firstPlaceholder = "Enter email id"
                             secondPlaceholder = "Enter phone number"
                             buttonCaption = "Add Contact"
                             firstInputValue = {contactDetails.email}
-                            secondPlaceholder = {contactDetails.phoneNumber}
+                            secondInputValue = {contactDetails.phoneNumber}
                             onValueChange = {onValueChange}
                             onSubmit = {onSubmit}
                             onCloseButton={onCloseButton}/>

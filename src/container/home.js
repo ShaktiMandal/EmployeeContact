@@ -44,10 +44,17 @@ const Home = () => {
     const onSubmit = () => {
         if(groupDetails.email)
         {
-            createGroupApi(groupDetails)
+            createGroupApi({
+                groupName: groupDetails.groupName, 
+                description: groupDetails.description, 
+                email: groupDetails.email
+            })
             .then(result => {
                 if(result.success)
                 {
+                    // setGroupDetails({
+                    //     email: result.userGroups
+                    // })
                     groupRef.current.style.display = "none";
                 }
             })

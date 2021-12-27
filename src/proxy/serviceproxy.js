@@ -10,7 +10,7 @@ import {
     getUserGroups,
     deleteConatct,
     deleteGroup} from '../service/service'
-import {formValidation } from '../validator'
+import {fieldValidation, formValidation } from '../validator'
 
 
 const userRegistration = (userDetails) => {
@@ -53,27 +53,76 @@ const userAuthentication = (userDetails) => {
 const getUserApi = (emailId) => {
 
     return new Promise((resolve, reject) => {
-        resolve(getUserGroups(emailId))
+        let errorMessage = fieldValidation(emailId);
+        if(errorMessage.length === 0)
+        {
+            resolve(getUserGroups(emailId))
+        }
+        else
+        {
+            reject({
+                success: false,
+                errorMessage
+            })
+        }
+        
     })
 }
 
 const createGroupApi = (groupDetails) => {
     return new Promise((resolve, reject) => {
-        resolve(createGroup(groupDetails))
+
+        let errorMessage = formValidation(groupDetails);
+        if(errorMessage.length === 0)
+        {
+            resolve(createGroup(groupDetails))
+        }
+        else
+        {
+            reject({
+                success: false,
+                errorMessage
+            })
+        }
+        
     })
 }
 
-const getGroupsApi = (user) => {
+const getGroupsApi = (email) => {
 
     return new Promise((resolve, reject) => {
-        resolve(getUserGroups(user))
+
+        let errorMessage = fieldValidation(email);
+        if(errorMessage.length === 0)
+        {
+            resolve(getUserGroups(email))
+        }
+        else
+        {
+            reject({
+                success: false,
+                errorMessage
+            })
+        }        
     })
 }
 
 const updateGroupApi = (grpDetails) => {
 
     return new Promise((resolve, reject) => {
-        resolve(updateGroup(grpDetails))
+        let errorMessage = formValidation(grpDetails);
+
+        if(errorMessage.length === 0)
+        {
+            resolve(updateGroup(grpDetails))
+        }
+        else
+        {
+            reject({
+                success: false,
+                errorMessage
+            })
+        }        
     })
 }
 
@@ -87,14 +136,40 @@ const deleteGroupApi = (groupId) => {
 const createContactApi = (contactDetails) => {
 
     return new Promise((resolve, reject) => {
-        resolve(createContact(contactDetails))
+        let errorMessage = formValidation(contactDetails);
+
+        if(errorMessage.length === 0)
+        {
+            resolve(createContact(contactDetails))
+        }
+        else
+        {
+            reject({
+                success: false,
+                errorMessage
+            })
+        }   
+      
     })
 }
 
-const updateContactApi = (contactDetails) => {
+const updateContactApi = (groupId, contactDetails) => {
 
     return new Promise((resolve, reject) => {
-        resolve(updateContact(contactDetails))
+      
+        let errorMessage = formValidation(contactDetails);
+
+        if(errorMessage.length === 0)
+        {
+            resolve(updateContact(groupId, contactDetails))
+        }
+        else
+        {
+            reject({
+                success: false,
+                errorMessage
+            })
+        }   
     })
 }
 

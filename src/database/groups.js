@@ -5,10 +5,14 @@ var groupDB = (function() {
 
     return function()
     {
-        const getGroups = function(email) {
+        const getGroups = function(email="") {
         
-            let groups = JSON.parse(localStorage.getItem("Groups") || []);
-            return groups.filter(item => item.email === email);
+            let groups = JSON.parse(localStorage.getItem("Groups") || "[]");
+            if(email.length > 0)
+            {
+                return groups.filter(item => item.email === email);
+            }
+            return groups;
         }
 
         const getGroup = function(grpId)
@@ -19,38 +23,54 @@ var groupDB = (function() {
 
         const createGroup = function(groupDetails) {
             let groups = [];
-            groupDetails.id = createUUID();
+            groupDetails.groupId = createUUID();
             groupDetails.contacts = [];           
             if(localStorage.getItem("Groups"))
             {
                 groups = JSON.parse(localStorage.getItem("Groups")|| "[]");
-                groups.push(groupDetails);
+                groups.push({
+                    groupId: groupDetails.groupId,
+                    email: groupDetails.email,
+                    groupName : groupDetails.groupName,
+                    description: groupDetails.description,
+                    contacts: []
+                });
+
                 localStorage.setItem("Groups", JSON.stringify(groups));
             }
             else
             {
                 groups.push(groupDetails);
-                localStorage.setItem("Groups", JSON.stringify(groups));
-                
+                localStorage.setItem("Groups", JSON.stringify(groups));                
             }
 
             return groups;
         }
 
         const updateGroup = function(groupDetails) {
-            let group = getGroup(groupDetails.id);
-            group[0].name = groupDetails.name;
-            group[0].description = groupDetails.description;
-            group[0].groupId = groupDetails.groupId;
-            group[0].email = groupDetails.email;
-            let groups = JSON.parse(localStorage.getItem("Groups"));
-            localStorage.setItem("Groups", JSON.stringify(groups));
+
+            let groups = groupDB().getGroups(groupDetails.email);
+            let matchIndex = groups.findIndex(item => item.groupId === groupDetails.groupId); 
+            
+            groups[matchIndex].groupName = groupDetails.groupName;
+            groups[matchIndex].description = groupDetails.description;
+
+            if(localStorage.getItem("Groups"))
+            {
+                localStorage.setItem("Groups", JSON.stringify(groups));
+            }
             return groups;
         }
 
         const removeGroup = function(groupId) {
+            
             let groups = JSON.parse(localStorage.getItem("Groups"))
-            groups = groups.filter(group =>  group.id !== groupId);
+            groups = groups.filter(group =>  group.id !== groupId);          
+
+            if(localStorage.getItem("Groups"))
+            {
+                localStorage.setItem("Groups", JSON.stringify(groups));
+            }
             return groups;
         }
 

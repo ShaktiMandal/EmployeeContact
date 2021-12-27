@@ -2,13 +2,13 @@ import React from 'react';
 import classes from '../style/item.module.css';
 
 
-const Conatct = (props) => {
+const ConatctItem = (props) => {
 
     return (
         <div className={classes.item}>
             <div className={classes.details}>
-                <p>zsdasdasdasdasd adasdasdasd</p>
-                <p>asdasdasdad asdasdasdasd asdasdasdasdasdad asASASAS</p>
+                <p>{props.email}</p>
+                <p>{props.phoneNumber}</p>
             </div>
             <div className={classes.action}>
                  <button onClick={props.onConatctEdit}>Edit</button>
@@ -18,4 +18,4 @@ const Conatct = (props) => {
     )
 }
 
-export default Conatct;
+export default ConatctItem;

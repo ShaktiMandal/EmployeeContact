@@ -1,34 +1,41 @@
-import React, {useRef, useEffect, useState, useContext} from 'react';
+import React, {useRef, useEffect, useState, useContext, useMemo} from 'react';
 import GroupItem from '../components/groupitem';
 import SearchPanel from '../components/searchpanel';
 import classes from '../style/groups.module.css';
 import PopUp from '../components/popup';
-import { getGroupsApi } from '../proxy/serviceproxy';
+import { createContactApi, deleteGroupApi, getGroupsApi, updateGroupApi } from '../proxy/serviceproxy';
 import { AppContext } from './appContext';
 
 
 const Groups = () => {
 
-    const conatactRef = useRef(null);
-    const [contactDetails, setContactDetails] = useState({
+    const initializeConatct = {
         email: "",
         phoneNumber: "",
+        groupId: "",
+        conatctId: "",
         error: ""
-    })
+    }
 
-    const [groupDetails, setGroupDetails] = useState({
+    const initializeGroup = {
         groupName:"",
         description: "",
+        email: "",
+        id: "",
         error: ""
-    });
+    }
 
+    const [selectedGroupIndex, setGroupIndex] = useState(-1);
+    const conatactRef = useRef(null);
+    const [contactDetails, setContactDetails] = useState(initializeConatct)
+    const [groupDetails, setGroupDetails] = useState(initializeGroup);
     const [componentName, setComponentName] = useState("");
     const [groups, setGroups] = useState([]);
 
     const onValueChange = (event) => {
         if(componentName === "Contact")
         {
-            setContactDetails({...contactDetails, [event.target.name]: event.target.name});
+            setContactDetails({...contactDetails, [event.target.name]: event.target.value});
         }
         else if(componentName === "Group")
         {
@@ -45,11 +52,10 @@ const Groups = () => {
                 if(result.success)
                 {
                     setGroups(result.userGroups);
-                    console.log("Printing the result", result);
                 }
                 else
                 {
-                    console.log("no the result", result);
+                    
                 }
             })
         }
@@ -60,29 +66,88 @@ const Groups = () => {
     const onSubmit = () => {
         if(componentName === "Contact")
         {
-            onAddContact();
+            createContactApi( 
+                {
+                    email:contactDetails.email, 
+                    phoneNumber: contactDetails.phoneNumber, 
+                    groupId: groups[selectedGroupIndex].groupId 
+                })
+                .then(result => {
+                    
+                })
+                .catch(error => {
+    
+                    
+                  
+                })
+                .finally(()=> {
+                    conatactRef.current.style.display = "none";
+                })
         }
         else if(componentName === "Group")
         {
-            onGroupEdit();
+            updateGroupApi({
+                groupName: groupDetails.groupName,
+                description: groupDetails.description,
+                email: groups[selectedGroupIndex].email,
+                groupId: groups[selectedGroupIndex].groupId
+            })
+            .then(result => {
+                if(result.success)
+                {
+                    //need to set new group
+                }
+                else
+                {
+                    //neeed to display error message
+                }
+            })
+            .catch(error => error)
+            .finally(()=> {
+                conatactRef.current.style.display = "none"; 
+            })
         }
     }
 
-    const onAddContact = () => {
-
-        setComponentName("Contact")
+    const onAddContact = (index) => {
+        setComponentName("Contact");
+        // componentName = component;
+        
+        // selectedGroupIndex = index;
+        setGroupIndex(index)
         conatactRef.current.style.display = "block"; 
     }
 
-    const onGroupEdit = () => {
-        setComponentName("Group")
+    const onGroupEdit = (index) => {    
+        setComponentName("Group"); 
+        setGroupDetails({...groupDetails, groupName: groups[index].groupName, description: groups[index].description})
+        // selectedGroupIndex = index;
+        setGroupIndex(index)
         conatactRef.current.style.display = "block"; 
     }
 
-    const onRemoveGroup = () => {
-        alert("remove");
+    const onRemoveGroup = (index) => {
+        deleteGroupApi(groups[index].id)
+        .then(result => {
+            if(result.success)
+            {
+                //update the group
+            }
+            else
+            {
+                //display error message
+            }
+        })
     }
     const onCloseButton = () => {
+        if(componentName === "Contact")
+        {
+            setContactDetails(initializeGroup);
+        }
+        else if(componentName === "Group")
+        {
+            setGroupDetails(initializeGroup);
+        }
         conatactRef.current.style.display = "none"; 
     }
   
@@ -99,17 +164,21 @@ const Groups = () => {
 
                 groups.length > 0 ?
 
-                <ul style={{margin: "0px"}}>
+                <ul className={classes.usergroups}>
                                     
                     {
-                        groups.map(eachGroup => {
-                            return <GroupItem 
-                            groupName = {eachGroup.groupName}
-                            description = {eachGroup.description}
-                            onAddConatct = {onAddContact} 
-                            onGroupEdit={onGroupEdit}
-                            onRemoveGroup = {onRemoveGroup}
-                            />
+                        groups.map((eachGroup, index) => {
+                            return(
+                            <li>
+                                <GroupItem 
+                                groupName = {eachGroup.groupName}
+                                description = {eachGroup.description}
+                                onAddConatct = {()=> onAddContact.call(null, index)} 
+                                onGroupEdit={()=> onGroupEdit.call(null, index)}
+                                onRemoveGroup = {()=> onRemoveGroup.call(null, index)}
+                                />
+                            </li>
+                            )
                         })
                     }              
                                     
@@ -145,8 +214,8 @@ const Groups = () => {
                                             secondInputType = "tel"
                                             firsInputId = "emailId"              
                                             secondInputId = "phoneNumberId"
-                                            secondInputName = "email"
-                                            firstInputName = "phoneNumber"
+                                            secondInputName = "phoneNumber"
+                                            firstInputName = "email"
                                             firstPlaceholder = "Enter email id"
                                             secondPlaceholder = "Enter phone number"
                                             buttonCaption = "Add Contact"
