@@ -5,7 +5,8 @@ const SearchPanel = (props) => {
     return (
 
         <div className={classes.searchpanel}>
-            <input onKeyUp={props.onSearch} type="text" width="300px"></input>
+            <input placeholder={props.placeholder} onKeyUp={props.onSearch} 
+            style={{color: "black"}} type="text" width="300px"></input>
         </div>
     )
 }

@@ -147,7 +147,7 @@ const Contacts = () => {
 
     return (
         <div>
-            {contacts.length > 0 || userSearched ? <SearchPanel onSearch = {onSearch}/> : null }
+            {contacts.length > 0 || userSearched ? <SearchPanel placeholder= "Search contact - email/phone number" onSearch = {onSearch}/> : null }
             <div className={classes.displayGroup}> 
                 {
                     contacts.length > 0 ?
@@ -185,7 +185,7 @@ const Contacts = () => {
                             secondInputName = "phoneNumber"
                             firstPlaceholder = "Enter email id"
                             secondPlaceholder = "Enter phone number"
-                            buttonCaption = "Add Contact"
+                            buttonCaption = "Edit Contact"
                             firstInputValue = {contactDetails.email}
                             secondInputValue = {contactDetails.phoneNumber}
                             onValueChange = {onValueChange}

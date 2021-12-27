@@ -157,7 +157,7 @@ const Groups = (props) => {
 
     return (
         <div className={classes.groupSection}> 
-            { groups.length > 0  ? <SearchPanel onSearch = {onSearch}/> : null}
+            { groups.length > 0  ? <SearchPanel  placeholder= "Search contact - group name" onSearch = {onSearch}/> : null}
             <div className={classes.displayGroup}> 
             {
 
@@ -186,7 +186,7 @@ const Groups = (props) => {
             </div>
             <div className={classes.createContact} ref={conatactRef}>
                     {componentName === "Group" ?   <PopUp 
-                        heading = "Create Group"
+                        heading = "Edit Group"
                         firstHeading = "Group Name"
                         secondHeading = "Description"
                         firstInputType= "text"
@@ -197,7 +197,7 @@ const Groups = (props) => {
                         firstInputName = "groupName"
                         firstPlaceholder = "Enter group name"
                         secondPlaceholder = "Enter description"
-                        buttonCaption = "Create Group"
+                        buttonCaption = "Update Group"
                         firstInputValue = {groupDetails.groupName}
                         secondInputValue = {groupDetails.description}
                         onValueChange = {onValueChange}

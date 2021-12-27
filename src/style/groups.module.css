@@ -16,11 +16,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .usergroups
 {
     width: 70%;
+    height: 300px;
+    overflow-y: auto;
 }
 
 .usergroups li{
