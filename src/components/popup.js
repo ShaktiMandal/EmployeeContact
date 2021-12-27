@@ -10,8 +10,7 @@ const PopUp = (props) => {
             {/* <div>                           
                 {props.ErrorMsg.length === 0 ? null : <h4 style={{textAlign:"center", color: "red"}}>{props.ErrorMsg}</h4>}
             </div> */}
-            <div className={classes.inputdiv}>
-                <h5>{props.firstHeading}</h5>
+            <div className={classes.inputdiv}>            
                 <Input type={props.firstInputType}     
                 id = {props.firsInputId}
                 name= {props.firstInputName}
@@ -23,7 +22,6 @@ const PopUp = (props) => {
             
             </div>
             <div className={classes.inputdiv }>
-                <h5>{props.secondHeading}</h5>
                 <Input type={props.secondInputType}   
                 name={props.secondInputName}                         
                 id ={props.secondInputId}
@@ -39,7 +37,7 @@ const PopUp = (props) => {
                 onClick = {props.onSubmit}
                 type="button">{props.buttonCaption}</button>                               
             </div>   
-            <span onClick={props.onCloseButton} className={classes.closeBtn}>x</span>                      
+            <span onClick={props.onCloseButton} className={classes.closeBtn}></span>                      
         </div>
     )
     

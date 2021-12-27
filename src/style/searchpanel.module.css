@@ -1,20 +1,32 @@
 .searchpanel
 {
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-bottom: 20px;
 }
 
+
 .searchpanel input{
-    width: 80%;
-    padding: 10px; 
+    background: none;
+    border: 2px solid #3498db;
     border-radius: 25px;
-    border: none;
+    padding-left: 10px;
     outline: none;
+    transition: 0.25s;
+    text-align: center;
+    color: black;
+    height: 30px;
+    width: 50%;
 }
 
-@media screen and (min-width: 1000px)
+.searchpanel input:focus{
+    width: 50%;
+    border-color: #2ecc71; 
+}
+
+@media screen and (max-width: 1000px)
 {
     .searchpanel input{
         width: 40%;

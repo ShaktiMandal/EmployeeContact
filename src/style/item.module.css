@@ -6,7 +6,12 @@
     width: 90%;
     padding: 10px;
     margin-bottom: 5px;
-    background-color: lightgray;
+    background-color: rgb(26, 24, 24);
+}
+
+.item p{
+    font-size: 20px;
+    color: white ;
 }
 
 .action,
@@ -19,17 +24,57 @@
     column-gap: 5px;
 }
 
-.action button{
-
-    width: 100%;
-    height: 30px;
+.action button {
+    display: inline-block;
+    padding: .7rem 1.25rem; 
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
     border: none;
-    color: white;
-    background: transparent;
     outline: none;
-    border: 1px solid gray;
 }
+    .action button::after {
+      content: '';
+      color: black;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: -2;
+    }
+    .action button::before {
+      content: '';
+      position: absolute;   
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: var(--clr-red);
+      transition: all .3s;
+      z-index: -1;
+    }
+    .action button:hover {
+      color: #fff;
+      cursor: pointer;
+    }
+    .action button:hover::before {
+        width: 100%;
+      }
 
-.action button:hover{
-    cursor: pointer;
+@media screen and (max-width: 800px)
+{
+    .item p{
+        font-size: 30px;
+    }
+
+    .item
+    {
+        flex-direction: column;
+    }
+    
 }
