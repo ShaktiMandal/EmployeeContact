@@ -87,7 +87,7 @@ const updateGroup = (grpDetails) => {
     {
             return {
                 success : true, 
-                updatedGroup: groups,
+                userGroups: groups,
                 errorMessage: ""
             }
     }
@@ -95,7 +95,7 @@ const updateGroup = (grpDetails) => {
     {
         return {
             success : false, 
-            updatedGroup: [],
+            userGroups: [],
             errorMessage: "No group present to update"
         }
     }
@@ -113,25 +113,6 @@ const deleteGroup = (grpId) => {
 }
 
 const createContact = (contactDetails) => {
-
-    // let group = groups.filter(item => item.groupId === groupId);
-
-    // if(group.length >  0)
-    // {
-    //     group[0].contacts.push(contactDetails);
-
-    //     return {
-    //         success : true, 
-    //         groups,
-    //         errorMessage: ""
-    //     }
-    // }
-
-    // return {
-    //     success : false, 
-    //     groups,
-    //     errorMessage: "Unable to create conatct"
-    // }
 
     contactDB().addContact(contactDetails.groupId, contactDetails)
     return {
@@ -171,38 +152,6 @@ const getEmployeeContact = (grpId) => {
 
 const updateContact = (grpId, contactDetails) => {
     
-    // if(groups.length > 0)
-    // {
-    //     let group = groups.filter(item => item.groupId === grpId);
-    //     if(group.length > 0)
-    //     {
-    //         let contact = group[0].contacts.filter(item => item.id === contactDetails.id);
-    //         if(contact.length > 0)
-    //         {
-    //             contact[0].email = contactDetails.email;
-    //             contact[0].name = contactDetails.name;
-    //         }
-
-    //         return {
-    //             success : true, 
-    //             updatedContacts: group[0].contacts,
-    //             errorMessage: ""
-    //         }
-    //     }
-
-    //     return {
-    //         success : false, 
-    //         updatedContacts: [],
-    //         errorMessage: "No contact present to update"
-    //     }
-    // }
-    // return {
-    //     success : false, 
-    //     updatedGroup: [],
-    //     errorMessage: "There is no group for this user"
-    // }
-
-
     contactDB().updateContact(grpId, contactDetails);
     return {
         success : true, 
@@ -212,27 +161,12 @@ const updateContact = (grpId, contactDetails) => {
 }
 
 const deleteConatct = (grpId, contactId) => {
-
-    // let contacts;
-    // groups = groups.filter(item => item.groupId === grpId);
-
-    // if(groups.length > 0)
-    // {
-    //     contacts = groups[0].conatcts = groups[0].conatcts.filter(contact =>  contact.id === contactId);
-        
-    // }
-
-    // return {
-    //     success : true, 
-    //     contacts,
-    //     errorMessage: ""
-    // }
     let currentCount = contactDB().getContacts(grpId).length;
     contactDB().removeContact(grpId, contactId);
     let updatedCount = contactDB().getContacts(grpId).length;
     return {
         success : currentCount - updatedCount === 1 ? true : false, 
-        updatedGroup: groupDB().getGroups(grpId),
+        contacts: groupDB().getGroups(grpId),
         errorMessage: currentCount - updatedCount === 1 ? "" : "Unable to remove contact"
     }
 }

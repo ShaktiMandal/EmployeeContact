@@ -42,7 +42,7 @@ var contactDB = (function() {
         }
 
         const removeContact = function(groupId, contactId) {   
-            let groups = groupDB().getGroups(groupId);
+            let groups = groupDB().getGroups();
             let matchIndex = groups.findIndex(item => item.groupId === groupId);
             groups[matchIndex].contacts = groups[matchIndex].contacts.filter(contact => contact.id !== contactId);
 

@@ -51,10 +51,30 @@ const Contacts = () => {
     const onRemoveContact = (index) => {
         deleteConatctApi(contacts[index].groupId, contacts[index].id)
         .then(result => {
+            if(result.success)
+            {
+                let contacts = [];
+                let groups = JSON.parse(
+                  localStorage.getItem("Groups") || "[]"
+                );
+                groups.forEach((group) => {
+                  if (
+                    group.contacts !== undefined &&
+                    group.contacts.length > 0
+                  ) {
+                    contacts = contacts.concat(...group.contacts);
+                  }
+                });
 
+                setContacts(contacts);
+            }
+            else
+            {
+                setContactDetails({...setContactDetails, error: result.errorMessage})
+            }
         })
         .catch(error => {
-
+            setContactDetails({...setContactDetails, error})
         })
     }
 
@@ -77,17 +97,30 @@ const Contacts = () => {
         .then(result => {
             if(result.success)
             {
-
+                    let contacts = [];
+                    let groups = JSON.parse(
+                      localStorage.getItem("Groups") || "[]"
+                    );
+                    groups.forEach((group) => {
+                      if (
+                        group.contacts !== undefined &&
+                        group.contacts.length > 0
+                      ) {
+                        contacts = contacts.concat(...group.contacts);
+                      }
+                    });
+                    conatactRef.current.style.display = "none";  
+                    setContacts(contacts);
             }
             else
             {
-
+                setContactDetails({...setContactDetails, error: result.errorMessage})
             }
         })
         .catch(error => {
-
+            setContactDetails({...setContactDetails, error})
         })
-        .finally(()=> conatactRef.current.style.display = "none")        
+       
     }
 
     const onCloseButton =() => {
@@ -114,7 +147,7 @@ const Contacts = () => {
                                 email = {contact.email}
                                 phoneNumber = {contact.phoneNumber}
                                 onConatctEdit={()=> onConatctEdit.call(null, index)}
-                                onRemoveGroup = {()=> onRemoveContact.call(null, index)}
+                                onRemoveContact = {()=> onRemoveContact.call(null, index)}
                                 />
                             </li>
                             )

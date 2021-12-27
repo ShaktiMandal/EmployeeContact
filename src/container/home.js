@@ -6,10 +6,14 @@ import Conatcts from './contacts';
 import PopUp from '../components/popup';
 import { createGroupApi } from '../proxy/serviceproxy';
 import { AppContext } from './appContext';
+import { clearLocalStorage } from './shared';
+import { useNavigate } from 'react-router';
 
 
 const Home = () => {
 
+    const groupRef = useRef(null);
+    const [isUpdated, setUpdate] = useState(false);
     const {context} = useContext(AppContext);
     const [groupDetails, setGroupDetails] = useState({
         groupName:"",
@@ -18,7 +22,7 @@ const Home = () => {
         error: ""
     });
 
-    const groupRef = useRef(null);
+    const navigate = useNavigate();
 
     const onValueChange = (event) => {
         setGroupDetails({...groupDetails, [event.target.name]: event.target.value});
@@ -52,9 +56,7 @@ const Home = () => {
             .then(result => {
                 if(result.success)
                 {
-                    // setGroupDetails({
-                    //     email: result.userGroups
-                    // })
+                    setUpdate(true);                   
                     groupRef.current.style.display = "none";
                 }
             })
@@ -69,10 +71,15 @@ const Home = () => {
         setGroupDetails({});
     }
 
+    const onSignOut = () => {
+        clearLocalStorage();
+        navigate("/signin");
+    }
+
     return(
         <React.Fragment>
-            <Navbar onOpenGroup={onOpenGroup}/>
-            {window.location.toString().includes('/contact') ? <Conatcts context={context}/> : <Groups context={context}/> }
+            <Navbar onOpenGroup={onOpenGroup} onSignOut= {onSignOut}/>
+            {window.location.toString().includes('/contact') ? <Conatcts context={context}/> : <Groups updated = {isUpdated} context={context}/> }
             <div className={classes.creategroup} ref={groupRef}>
                 <PopUp 
                     heading = "Create Group"
@@ -88,7 +95,7 @@ const Home = () => {
                     secondPlaceholder = "Enter description"
                     buttonCaption = "Create Group"
                     firstInputValue = {groupDetails.groupName}
-                    secondPlaceholder = {groupDetails.description}
+                    secondInputValue = {groupDetails.description}
                     onValueChange = {onValueChange}
                     onSubmit = {onSubmit}
                     onCloseButton={onCloseButton}/>
@@ -97,4 +104,4 @@ const Home = () => {
     )
 }
 
-export default memo(Home);
+export default Home;

@@ -7,7 +7,8 @@ import { createContactApi, deleteGroupApi, getGroupsApi, updateGroupApi } from '
 import { AppContext } from './appContext';
 
 
-const Groups = () => {
+const Groups = (props) => {
+
 
     const initializeConatct = {
         email: "",
@@ -44,7 +45,6 @@ const Groups = () => {
     }
 
     useEffect(()=> {
-
         if(localStorage.getItem("email"))
         {
             getGroupsApi(localStorage.getItem("email"))
@@ -61,7 +61,7 @@ const Groups = () => {
         }
 
         conatactRef.current.style.display = "none"; 
-    },[])
+    }, [props.updated])
 
     const onSubmit = () => {
         if(componentName === "Contact")
@@ -95,25 +95,22 @@ const Groups = () => {
             .then(result => {
                 if(result.success)
                 {
-                    //need to set new group
+                    setGroups(result.userGroups);
+                    conatactRef.current.style.display = "none";
                 }
                 else
                 {
-                    //neeed to display error message
+                    setGroupDetails({...groupDetails, error: result.errorMessage});
                 }
             })
-            .catch(error => error)
-            .finally(()=> {
-                conatactRef.current.style.display = "none"; 
-            })
+            .catch(error => {
+                setGroupDetails({...groupDetails, error});
+            })           
         }
     }
 
     const onAddContact = (index) => {
         setComponentName("Contact");
-        // componentName = component;
-        
-        // selectedGroupIndex = index;
         setGroupIndex(index)
         conatactRef.current.style.display = "block"; 
     }
@@ -121,23 +118,25 @@ const Groups = () => {
     const onGroupEdit = (index) => {    
         setComponentName("Group"); 
         setGroupDetails({...groupDetails, groupName: groups[index].groupName, description: groups[index].description})
-        // selectedGroupIndex = index;
         setGroupIndex(index)
         conatactRef.current.style.display = "block"; 
     }
 
     const onRemoveGroup = (index) => {
-        deleteGroupApi(groups[index].id)
+        deleteGroupApi(groups[index].groupId)
         .then(result => {
             if(result.success)
             {
-                //update the group
+                setGroups(result.userGroups);
             }
             else
-            {
-                //display error message
-            }
-        })
+                {
+                    setGroupDetails({...groupDetails, error: result.errorMessage});
+                }
+            })
+            .catch(error => {
+                setGroupDetails({...groupDetails, error});
+            })    
     }
     const onCloseButton = () => {
         if(componentName === "Contact")

@@ -18,7 +18,7 @@ var groupDB = (function() {
         const getGroup = function(grpId)
         {
             let groups = JSON.parse(localStorage.getItem("Groups") || []);
-            return groups.filter(item => item.id === grpId); 
+            return groups.filter(item => item.groupId === grpId); 
         }
 
         const createGroup = function(groupDetails) {
@@ -65,7 +65,7 @@ var groupDB = (function() {
         const removeGroup = function(groupId) {
             
             let groups = JSON.parse(localStorage.getItem("Groups"))
-            groups = groups.filter(group =>  group.id !== groupId);          
+            groups = groups.filter(group =>  group.groupId !== groupId);          
 
             if(localStorage.getItem("Groups"))
             {

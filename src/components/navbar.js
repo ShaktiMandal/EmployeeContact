@@ -33,7 +33,7 @@ const Navbar = (props) => {
                 <li className={classes.navitem}><a href="/home/contact">Contacts</a></li>
                 <li className={classes.navitem}><a href="/home/group">Groups</a></li>
                 <li className={classes.navitem}><button onClick={props.onOpenGroup}>Create Group</button></li>
-                <li className={classes.navitem}><a href="/signout">Sign out</a></li>
+                <li className={classes.navitem}><button onClick={props.onSignOut}>Sign Out</button></li>
               </ul>
             </nav>            
           </div>
