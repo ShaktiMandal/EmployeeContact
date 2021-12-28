@@ -1,21 +1,25 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import classes from '../style/navbar.module.css';
 
 const Navbar = (props) => {
 
-    const toggleBtnRef = useRef(null);
+    
+    const toggleNavRef = useRef(null);
+  
     const onClcik = function () {
-
-        console.log(toggleBtnRef.current.classList);
-    if (toggleBtnRef.current.classList.contains("active")) {
-        toggleBtnRef.current.attributes.push("aria-expanded", "false");
-        toggleBtnRef.current.attributes.push("aria-label", "menu");
-        toggleBtnRef.current.classList.remove("active");
-    } else {
-        toggleBtnRef.current.classList.add("active");
-        toggleBtnRef.current.attributes.push("aria-label", "close menu");
-        toggleBtnRef.current.attributes.push("aria-expanded", "true");
-    }
+      if (toggleNavRef.current.classList.contains("active")) {
+        toggleNavRef.current.classList.remove("active");
+        toggleNavRef.current.style.visibility = "hidden";
+        toggleNavRef.current.style.opacity = "0";
+        toggleNavRef.current.style.zIndex = "-1";
+        toggleNavRef.current.style.transform = "translateY(-100%)";
+      } else {
+        toggleNavRef.current.classList.add("active");
+        toggleNavRef.current.style.visibility = "visible";
+        toggleNavRef.current.style.opacity = "1";
+        toggleNavRef.current.style.zIndex = "2";
+        toggleNavRef.current.style.transform = "translateY(0)";
+      }
     };
 
     return (
@@ -26,10 +30,10 @@ const Navbar = (props) => {
           </div>
           <div className={classes.siteheaderend}>
             <nav className={classes.nav}>
-              <button  ref={toggleBtnRef} onClick={props.onOpenGroup} className={classes.navtoggle} aria-expanded="false" type="button">
+              <button   onClick={onClcik} className={classes.navtoggle} aria-expanded="false" type="button">
                 menu
               </button>
-              <ul className={classes.navwrapper}>
+              <ul className={classes.navwrapper} ref={toggleNavRef}>
                 <li className={classes.navitem}><a href="/home/contact">Contacts</a></li>
                 <li className={classes.navitem}><a href="/home/group">Groups</a></li>
                 <li className={classes.navitem}><button onClick={props.onOpenGroup}>Create Group</button></li>
