@@ -16,8 +16,7 @@ const Contacts = () => {
         id: "",
         error: ""
     }
-
-    let isUserSearching = false;
+    
     let conatactRef = React.useRef(null);
     const[contactDetails, setContactDetails] = useState(initializeContacts);
     const [contacts, setContacts] = useState([]);

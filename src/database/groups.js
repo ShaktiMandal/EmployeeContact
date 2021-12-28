@@ -75,12 +75,26 @@ var groupDB = (function() {
         }
 
 
+        const SearchGroup = (searchValue) => {
+            let groups = groupDB().getGroups();
+
+            if(groups.length > 0)
+            {
+                return groups.filter(group => {
+                    return group.groupName.includes(searchValue);
+                })
+            }
+            return [];
+        }
+
+
         return {
             getGroup,
             getGroups,
             updateGroup,
             createGroup,
-            removeGroup
+            removeGroup,
+            SearchGroup
         }
     }
 }

@@ -31,10 +31,11 @@ const Authentication = () => {
         userAuthentication({email, password})
         .then(result => { 
             if(result.success)
-            { 
-                setContext({email: result.email});
+            {  
                 localStorage.setItem("loginToken", result.token);
-                navigate('/home');
+                localStorage.setItem("email", result.email);
+                navigate("/home");
+                setContext({email: result.email});
             }
             else
             {
@@ -109,8 +110,6 @@ const Authentication = () => {
                                 errorMsg = {autheticationData.authenticationError}      
                                 />;
     }
- 
-
     return renderScreen;   
 }
 

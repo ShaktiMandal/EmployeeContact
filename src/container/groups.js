@@ -3,7 +3,7 @@ import GroupItem from '../components/groupitem';
 import SearchPanel from '../components/searchpanel';
 import classes from '../style/groups.module.css';
 import PopUp from '../components/popup';
-import { createContactApi, deleteGroupApi, getGroupsApi, updateGroupApi } from '../proxy/serviceproxy';
+import { createContactApi, deleteGroupApi, getGroupsApi, searchGroupApi, updateGroupApi } from '../proxy/serviceproxy';
 import { AppContext } from './appContext';
 
 
@@ -32,6 +32,7 @@ const Groups = (props) => {
     const [groupDetails, setGroupDetails] = useState(initializeGroup);
     const [componentName, setComponentName] = useState("");
     const [groups, setGroups] = useState([]);
+    const [userSearched, setUserSearched] = useState(false);
 
     const onValueChange = (event) => {
         if(componentName === "Contact")
@@ -156,12 +157,19 @@ const Groups = (props) => {
   
 
     const onSearch = (event) => {
-
+        setUserSearched(true);
+        searchGroupApi(event.target.value)
+        .then(result => {
+            setGroups(result.groups);
+        })
+        .catch(error => {
+            setGroupDetails({...groupDetails, error});
+        });
     }
 
     return (
         <div className={classes.groupSection}> 
-            { groups.length > 0  ? <SearchPanel  placeholder= "Search contact - group name" onSearch = {onSearch}/> : null}
+            { groups.length > 0 || userSearched ? <SearchPanel  placeholder= "Search contact - group name" onSearch = {onSearch}/> : null}
             <div className={classes.displayGroup}> 
             {
 

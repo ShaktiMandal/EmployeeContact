@@ -30,15 +30,9 @@ const Home = () => {
 
     useEffect(()=> {
 
-        if(localStorage.getItem("email") == null && context)
-        {
-            localStorage.setItem("email", context.email);
-        }
-
+        groupRef.current.style.display = "none";
         let email = localStorage.getItem("email");
         setGroupDetails({...groupDetails, email})
-        
-        groupRef.current.style.display = "none"; 
     },[])
 
     const onOpenGroup = () => {
@@ -58,6 +52,13 @@ const Home = () => {
                 {
                     setUpdate(true);                   
                     groupRef.current.style.display = "none";
+                    setGroupDetails(
+                    {   ...groupDetails,   
+                        groupName:"",
+                        description: "",
+                        email: "",
+                        error: ""
+                    })
                 }
             })
             .catch(error => {

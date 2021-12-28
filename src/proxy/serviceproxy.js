@@ -10,7 +10,8 @@ import {
     getUserGroups,
     deleteConatct,
     searchContacts,
-    deleteGroup} from '../service/service'
+    deleteGroup,
+    searchGroups} from '../service/service'
 import {fieldValidation, formValidation } from '../validator'
 
 
@@ -194,36 +195,11 @@ const searchContactApi = (searchValue) => {
     })
 }
 
-
-// (Array.prototype.formatedString = () => 
-// {
-//     console.log("Formated string called");
-//     if(this.length === 0)
-//     {
-//         return ""
-//     }
-//     else
-//     {
-//         let formatedString;
-//         let split = this.split(",");
-//         console.log("Formated string called", split);
-//         for(let index = 0; index < split.length; index++)
-//         {
-//             if(this.length === 1)
-//             {
-//                 formatedString = split[index]
-//             }
-//             else
-//             {
-//                 formatedString += "\n" + split[index]
-//             }
-//         }
-
-//         console.log("Formated string called", split);
-//         return formatedString;
-//     }
-// })()
-
+const searchGroupApi = (searchValue) => {
+    return new Promise((resolve, reject) => { 
+        resolve(searchGroups(searchValue));
+    })
+}
 
 export {
     userRegistration, 
@@ -238,5 +214,6 @@ export {
     deleteGroupApi,
     getUserApi,
     getGroupsApi,
-    searchContactApi
+    searchContactApi,
+    searchGroupApi
 }

@@ -1,4 +1,3 @@
-
 import { contactDB } from '../database/contact';
 import { groupDB } from '../database/groups';
 import {userDB} from '../database/users'
@@ -191,6 +190,26 @@ const searchContacts = (searchValue) => {
     }
 }
 
+const searchGroups = (searchValue) => {
+    let searchedResult = groupDB().SearchGroup(searchValue);
+    if(searchedResult.length > 0)
+    {
+        return{
+            success: true, 
+            groups: searchedResult,
+            error: ""
+        }
+    }
+    else
+    {
+        return{
+            success: false,
+            groups: [],
+            error: "No search result found"
+        }
+    }
+}
+
 
 export {
     registerUser, 
@@ -204,5 +223,6 @@ export {
     getUserDetails,
     deleteConatct,
     deleteGroup,
-    searchContacts
+    searchContacts,
+    searchGroups,
 };

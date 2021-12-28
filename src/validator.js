@@ -44,13 +44,12 @@ const formLevelValidation = () => {
               let message = fieldValidation(item, data[item]);
               if(message.length > 0)
               {
-                errorMessages += "\n" + message;
+                errorMessages += " / " + message;
               }
             }  
                
         });
 
-        console.log("form validation", errorMessages);
         return errorMessages;
     }
 }
