@@ -179,7 +179,7 @@ const Groups = (props) => {
                     {
                         groups.map((eachGroup, index) => {
                             return(
-                            <li>
+                            <li key={eachGroup.groupId}>
                                 <GroupItem 
                                 groupName = {eachGroup.groupName}
                                 description = {eachGroup.description}

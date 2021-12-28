@@ -154,7 +154,7 @@ const Contacts = () => {
                     {
                         contacts.map((contact, index) => {
                             return(
-                            <li>
+                            <li key={contact.id}>
                                 <ConatctItem 
                                 email = {contact.email}
                                 phoneNumber = {contact.phoneNumber}
