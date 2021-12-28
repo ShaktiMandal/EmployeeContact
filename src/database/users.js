@@ -1,6 +1,4 @@
 var userDB = (function() {
-        let users = [];
-
         return function()
         {
             const getUser = function(user) {

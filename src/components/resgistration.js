@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from '../style/authentication.module.css';
 import Input from './Input';
-import Hyperlink from './Hyperlink';
 
 
 const Registration = (props) => {
@@ -10,7 +9,7 @@ const Registration = (props) => {
             <div className={classes.logInform}> 
             <h3>Registration</h3>
             <div>                           
-                {props.errorMsg == undefined || props.errorMsg.length === 0 ? null : <h4 style={{textAlign:"center", color: "red"}}>{props.errorMsg}</h4>}
+                {props.errorMsg === undefined || props.errorMsg.length === 0 ? null : <h4 style={{textAlign:"center", color: "red"}}>{props.errorMsg}</h4>}
             </div>
             <div className={classes.inputdiv}>             
                 <Input type="email"   

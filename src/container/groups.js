@@ -1,10 +1,10 @@
-import React, {useRef, useEffect, useState, useContext, useMemo} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import GroupItem from '../components/groupitem';
 import SearchPanel from '../components/searchpanel';
 import classes from '../style/groups.module.css';
 import PopUp from '../components/popup';
 import { createContactApi, deleteGroupApi, getGroupsApi, searchGroupApi, updateGroupApi } from '../proxy/serviceproxy';
-import { AppContext } from './appContext';
+import { debounceSearch } from './shared';
 
 
 const Groups = (props) => {
@@ -156,20 +156,20 @@ const Groups = (props) => {
     }
   
 
-    const onSearch = (event) => {
+    const onSearch = debounceSearch((inputEvent) => {
         setUserSearched(true);
-        searchGroupApi(event.target.value)
+        searchGroupApi(inputEvent.target.value)
         .then(result => {
             setGroups(result.groups);
         })
         .catch(error => {
             setGroupDetails({...groupDetails, error});
         });
-    }
+    }, 100)
 
     return (
         <div className={classes.groupSection}> 
-            { groups.length > 0 || userSearched ? <SearchPanel  placeholder= "Search contact - group name" onSearch = {onSearch}/> : null}
+            { groups.length > 0 || userSearched ? <SearchPanel  placeholder= "Search group - group name" onSearch = {onSearch}/> : null}
             <div className={classes.displayGroup}> 
             {
 

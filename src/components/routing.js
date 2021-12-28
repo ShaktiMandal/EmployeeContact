@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigate } from 'react-router';
 import {BrowserRouter, Route,Routes} from 'react-router-dom';
 const Authentication = React.lazy(()=> import("../container/authentication"));
 const Home = React.lazy(()=> import("../container/home"));

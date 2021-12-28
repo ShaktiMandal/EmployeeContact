@@ -1,5 +1,4 @@
 import {
-    getUserDetails, 
     registerUser, 
     signinUser,  
     updateContact, 

@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
-import Conatct from '../components/contactitem';
+import React, { useEffect, useState } from 'react';
 import SearchPanel from '../components/searchpanel';
 import classes from '../style/groups.module.css';
 import PopUp from '../components/popup';
 import { deleteConatctApi, updateContactApi, searchContactApi } from '../proxy/serviceproxy';
 import ConatctItem from '../components/contactitem';
+import { debounceSearch } from './shared';
 
 
 const Contacts = () => {
@@ -45,7 +45,7 @@ const Contacts = () => {
         
     }, [])
 
-    const onSearch = (event) => {
+    const onSearch = debounceSearch((event) => {
         setUserSearched(true);
         searchContactApi(event.target.value)
         .then(result => {
@@ -54,7 +54,7 @@ const Contacts = () => {
         .catch(error => {
             setContactDetails({...contactDetails, error});
         });
-    }
+    }, 100)
 
     const onRemoveContact = (index) => {
         deleteConatctApi(contacts[index].groupId, contacts[index].id)

@@ -8,7 +8,7 @@ const PopUp = (props) => {
         <div className={classes.group}> 
             <h3>{props.heading}</h3>
             <div>                           
-                {props.errorMsg == undefined || props.errorMsg.length === 0 ? null : <h4>{props.errorMsg}</h4>}
+                {props.errorMsg === undefined || props.errorMsg.length === 0 ? null : <h4>{props.errorMsg}</h4>}
             </div>
             <div className={classes.inputdiv}>            
                 <Input type={props.firstInputType}     

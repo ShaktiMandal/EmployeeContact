@@ -9,7 +9,7 @@ const SignIn = (props) => {
                 <div className={classes.logInform}> 
                     <h3>Sign in</h3>
                     <div>                           
-                        {props.errorMsg == undefined || props.errorMsg.length === 0 ? null : <h4>{props.errorMsg}</h4>}
+                        {props.errorMsg === undefined || props.errorMsg.length === 0 ? null : <h4>{props.errorMsg}</h4>}
                     </div>
                     <div className={classes.inputdiv}>                     
                         <Input type="email"      

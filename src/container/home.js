@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useContext, memo} from 'react';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import Navbar from '../components/navbar';
 import Groups from './groups';
 import classes from '../style/home.module.css'

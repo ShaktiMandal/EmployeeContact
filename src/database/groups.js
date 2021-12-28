@@ -1,4 +1,3 @@
-import { getUserGroups } from '../service/service';
 import {createUUID} from '../service/utils';
 
 var groupDB = (function() {
@@ -77,14 +76,21 @@ var groupDB = (function() {
 
         const SearchGroup = (searchValue) => {
             let groups = groupDB().getGroups();
-
-            if(groups.length > 0)
+            if(searchValue)
             {
-                return groups.filter(group => {
-                    return group.groupName.includes(searchValue);
-                })
+                if(groups.length > 0)
+                {
+                    return groups.filter(group => {
+                        return group.groupName.includes(searchValue);
+                    })
+                }
+                else
+                {
+                    return [];
+                }
             }
-            return [];
+           
+            return groups;
         }
 
 
