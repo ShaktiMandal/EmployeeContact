@@ -73,16 +73,20 @@ const Groups = (props) => {
                     groupId: groups[selectedGroupIndex].groupId 
                 })
                 .then(result => {
-                    
+                    if(result.success)
+                    {
+                        conatactRef.current.style.display = "none";
+                        setGroupDetails(initializeGroup);
+                    }
+                    else
+                    {
+                        setContactDetails({...contactDetails, error: result.errorMessage});
+                    }
                 })
-                .catch(error => {
-    
-                    
-                  
+                .catch(error => {    
+                    setContactDetails({...contactDetails, error: error.errorMessage});                  
                 })
-                .finally(()=> {
-                    conatactRef.current.style.display = "none";
-                })
+               
         }
         else if(componentName === "Group")
         {
@@ -104,7 +108,7 @@ const Groups = (props) => {
                 }
             })
             .catch(error => {
-                setGroupDetails({...groupDetails, error});
+                setGroupDetails({...groupDetails, error: error.errorMessage});
             })           
         }
     }
@@ -125,11 +129,11 @@ const Groups = (props) => {
     const onRemoveGroup = (index) => {
         deleteGroupApi(groups[index].groupId)
         .then(result => {
-            if(result.success)
-            {
-                setGroups(result.userGroups);
-            }
-            else
+                if(result.success)
+                {
+                    setGroups(result.userGroups);
+                }
+                else
                 {
                     setGroupDetails({...groupDetails, error: result.errorMessage});
                 }
@@ -141,7 +145,7 @@ const Groups = (props) => {
     const onCloseButton = () => {
         if(componentName === "Contact")
         {
-            setContactDetails(initializeGroup);
+            setContactDetails(initializeConatct);
         }
         else if(componentName === "Group")
         {
@@ -200,6 +204,7 @@ const Groups = (props) => {
                         buttonCaption = "Update Group"
                         firstInputValue = {groupDetails.groupName}
                         secondInputValue = {groupDetails.description}
+                        errorMsg = {groupDetails.error}
                         onValueChange = {onValueChange}
                         onSubmit = {onSubmit}
                         onCloseButton={onCloseButton}/> :
@@ -219,6 +224,7 @@ const Groups = (props) => {
                                             buttonCaption = "Add Contact"
                                             firstInputValue = {contactDetails.email}
                                             secondInputValue = {contactDetails.phoneNumber}
+                                            errorMsg = {contactDetails.error}
                                             onValueChange = {onValueChange}
                                             onSubmit = {onSubmit}
                                             onCloseButton={onCloseButton}/> : null

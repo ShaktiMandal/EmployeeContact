@@ -127,11 +127,11 @@ const Contacts = () => {
             }
             else
             {
-                setContactDetails({...setContactDetails, error: result.errorMessage})
+                setContactDetails({...contactDetails, error: result.errorMessage})
             }
         })
         .catch(error => {
-            setContactDetails({...setContactDetails, error})
+            setContactDetails({...contactDetails, error: error.errorMessage})
         })
        
     }
@@ -188,6 +188,7 @@ const Contacts = () => {
                             buttonCaption = "Edit Contact"
                             firstInputValue = {contactDetails.email}
                             secondInputValue = {contactDetails.phoneNumber}
+                            errorMsg = {contactDetails.error}
                             onValueChange = {onValueChange}
                             onSubmit = {onSubmit}
                             onCloseButton={onCloseButton}/>

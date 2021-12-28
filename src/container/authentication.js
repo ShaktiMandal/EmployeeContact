@@ -16,11 +16,11 @@ const Authentication = () => {
         authenticationError: ""
     }
 
-    const {context, setContext} = useContext(AppContext);
-   
+    const navigate = useNavigate();
+    const {context, setContext} = useContext(AppContext);   
     const [autheticationData, setAuthenticationData] = useState(initializeAuthData);
 
-    const navigate = useNavigate();  
+    
 
     const onValueChange = (event) =>{
         setAuthenticationData({...autheticationData, [event.target.name]: event.target.value})
@@ -36,21 +36,19 @@ const Authentication = () => {
                 localStorage.setItem("loginToken", result.token);
                 navigate('/home');
             }
-            // else
-            // {
-            //     setAuthenticationData({...setAuthenticationData, authenticationError: result.error});
-            // }
+            else
+            {
+                setAuthenticationData({...autheticationData, authenticationError: result.error});
+            }
         })
         .catch(error => {
-            setAuthenticationData({...setAuthenticationData, authenticationError: error.errorMessage});
+            setAuthenticationData({...autheticationData, authenticationError: error.errorMessage});
         })
     }
 
     const onRegister = () =>{
-        console.log("Register data", autheticationData)
         userRegistration(autheticationData)
         .then(result => {
-            console.log("Register data1", result);
             const {success} = result;
             if(success)
             { 
@@ -59,12 +57,12 @@ const Authentication = () => {
             }
             else
             {
-                setAuthenticationData({...setAuthenticationData, authenticationError: result.errorMessage});
+                setAuthenticationData({...autheticationData, authenticationError: result.error});
             }
         })
         .catch(error => {
             console.log("Register data1 failed", error);
-            setAuthenticationData({...setAuthenticationData, authenticationError: error.errorMessage});
+            setAuthenticationData({...autheticationData, authenticationError: error.errorMessage});
         })
     }
 
@@ -113,12 +111,7 @@ const Authentication = () => {
     }
  
 
-    return renderScreen;
-    // return (
-    //     <AppContext.Provider value={autheticationData.email}>
-    //         {renderScreen}
-    //     </AppContext.Provider>
-    // );
+    return renderScreen;   
 }
 
 export default Authentication;

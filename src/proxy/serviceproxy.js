@@ -15,17 +15,15 @@ import {fieldValidation, formValidation } from '../validator'
 
 
 const userRegistration = (userDetails) => {
-    console.log("Register data2", userDetails);
     return new Promise((resolve, reject) => {
 
         let errorMessage = formValidation(userDetails);        
         if(errorMessage.length === 0)
-        {    console.log("Register data3", errorMessage);
+        {   
             resolve(registerUser(userDetails))
         }
         else
         {
-            console.log("Register data3", errorMessage);
             reject({
                 success: false,
                 errorMessage

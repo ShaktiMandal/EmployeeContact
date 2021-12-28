@@ -7,9 +7,9 @@ const PopUp = (props) => {
     return(
         <div className={classes.group}> 
             <h3>{props.heading}</h3>
-            {/* <div>                           
-                {props.ErrorMsg.length === 0 ? null : <h4 style={{textAlign:"center", color: "red"}}>{props.ErrorMsg}</h4>}
-            </div> */}
+            <div>                           
+                {props.errorMsg == undefined || props.errorMsg.length === 0 ? null : <h4>{props.errorMsg}</h4>}
+            </div>
             <div className={classes.inputdiv}>            
                 <Input type={props.firstInputType}     
                 id = {props.firsInputId}

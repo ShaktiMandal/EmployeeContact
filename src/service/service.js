@@ -11,7 +11,7 @@ const registerUser = (userDetails) => {
         return{
             success: false,
             email: user.email,
-            error: "user already exits"
+            error: "user already exists"
         }
     }
     else
@@ -35,8 +35,8 @@ const signinUser = (userDetails) => {
         isPasswordMatched = validUser[0].password === userDetails.password;
     }
 
-    let errorMessage = validUser == null || validUser.length === 0 ? "User does not exist" : isPasswordMatched === false ? "Incorrect Password" : ""
-    console.log("User signing", errorMessage);
+    let errorMessage = validUser == null || validUser.length === 0 ? "User does not exists" : isPasswordMatched === false ? "Incorrect Password" : ""
+
     return {
         success: errorMessage.length === 0 ? true: false,
         email: userDetails.email,

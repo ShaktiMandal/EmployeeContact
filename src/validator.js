@@ -16,6 +16,7 @@ const fieldLevelValidation = () => {
         return getErrorMsgForPassword(value);
 
       case "name":
+      case "groupName":
       case "description":
       case "lastName":
       case "firstName":
@@ -60,12 +61,16 @@ const getErrorMsgForEmail = (email) => {
     {
       return "Please enter email id"
     }
+    if(!email.includes("@inmar.com"))
+    {
+      return "Invalid email, should have @inmar.com"
+    }
     if(regexp.test(email))
     {
         return "";
     }
 
-    return `Invalid email, make sure to add "inmar.com"`;
+    return "Invalid email";
 }
 
 const getErrorMsgForPhoneNo = (phoneNo) => {
