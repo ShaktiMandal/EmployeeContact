@@ -1,5 +1,8 @@
 import React from 'react'
 import classes from '../style/searchpanel.module.css'
+
+//Generic serach panel component, can be used 
+//anywhere in the application
 const SearchPanel = (props) => {
 
     return (

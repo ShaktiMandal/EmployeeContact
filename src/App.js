@@ -7,6 +7,8 @@ const AppRoutes = React.lazy(()=> import('./components/routing'))
 function App() {
 
   const [context, setContext] = useState(null);
+  //This is to update the context anywhere in the application. 
+  //Added it to update the context when user successfully logged in
   var value = useMemo(()=> ({context, setContext}), [context, setContext]);
 
 

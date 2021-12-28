@@ -6,6 +6,7 @@ var groupDB = (function() {
     {
         const getGroups = function(email="") {
         
+            //get the groups data from local storage, if not present, return empty string
             let groups = JSON.parse(localStorage.getItem("Groups") || "[]");
             if(email.length > 0)
             {
@@ -16,7 +17,8 @@ var groupDB = (function() {
 
         const getGroup = function(grpId)
         {
-            let groups = JSON.parse(localStorage.getItem("Groups") || []);
+            //get the groups data from local storage, if not present, return empty string
+            let groups = JSON.parse(localStorage.getItem("Groups") || "[]");
             return groups.filter(item => item.groupId === grpId); 
         }
 

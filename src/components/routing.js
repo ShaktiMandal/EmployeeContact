@@ -9,7 +9,9 @@ const AppRoutes = () => {
     let isUserAuthenticated = false;
     if(localStorage.getItem("loginToken"))
     {
-      console.log("Called for authentication");
+      //validating user authentication 
+      //by checking the token in local 
+      //storage
       isUserAuthenticated = true;
     }
 
@@ -19,6 +21,8 @@ const AppRoutes = () => {
           <Route exact path="/signin" element={<Authentication />} />
           <Route exact path="/register" element={<Authentication />} />
           {
+            //this to make sure, user can navigate 
+            //only if they are authenticated
             isUserAuthenticated ?
             <>
               <Route exact path="/home" element={<Home />} />

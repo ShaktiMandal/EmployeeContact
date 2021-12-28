@@ -1,3 +1,8 @@
+//This function is used to create unique Id
+//input - None
+//output - unique id
+
+
 const createUUID = ()=>{
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

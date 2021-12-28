@@ -30,6 +30,8 @@ const Home = () => {
 
     useEffect(()=> {
 
+        // setting email to group details so 
+        // that it can be passed when navigating
         groupRef.current.style.display = "none";
         let email = localStorage.getItem("email");
         setGroupDetails({...groupDetails, email})
@@ -40,6 +42,7 @@ const Home = () => {
     }
 
     const onSubmit = () => {
+        // this is creating group 
         if(groupDetails.email)
         {
             createGroupApi({
@@ -73,6 +76,8 @@ const Home = () => {
     }
 
     const onSignOut = () => {
+        //clearing all local storage item 
+        //and navigating to authentication page
         clearLocalStorage();
         navigate("/signin");
     }

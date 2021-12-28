@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from '../style/item.module.css';
 
-
 const ConatctItem = (props) => {
 
     return (

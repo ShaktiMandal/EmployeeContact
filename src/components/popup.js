@@ -2,6 +2,11 @@ import React from 'react';
 import Input from './Input';
 import classes from '../style/popup.module.css';
 
+
+// This is common pop up for the complete application. 
+// Using this to creagte group, add contact, edit group
+// and also edit contact. Made the pop up generic to 
+//reduce redundant code.
 const PopUp = (props) => {
 
     return(

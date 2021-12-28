@@ -32,6 +32,7 @@ const Authentication = () => {
         .then(result => { 
             if(result.success)
             {  
+                //set the token and email for authentication purpose
                 localStorage.setItem("loginToken", result.token);
                 localStorage.setItem("email", result.email);
                 navigate("/home");
@@ -39,6 +40,7 @@ const Authentication = () => {
             }
             else
             {
+                //set error message in case have any error
                 setAuthenticationData({...autheticationData, authenticationError: result.error});
             }
         })
@@ -53,21 +55,26 @@ const Authentication = () => {
             const {success} = result;
             if(success)
             { 
+                //initialize all data to avoid displaying on then 
+                //screen if reopens.
                 setAuthenticationData(initializeAuthData);
                 navigate('/signin')
             }
             else
             {
+                //setting error  to display same on the screen
                 setAuthenticationData({...autheticationData, authenticationError: result.error});
             }
         })
         .catch(error => {
-            console.log("Register data1 failed", error);
             setAuthenticationData({...autheticationData, authenticationError: error.errorMessage});
         })
     }
 
 
+    //Getting the current location 
+    //to decide which component to be 
+    //rerendered.
     let path = window.location;
     let renderScreen;
     

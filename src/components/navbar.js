@@ -6,6 +6,9 @@ const Navbar = (props) => {
     
     const toggleNavRef = useRef(null);
   
+
+    // this function is used to display item in case of mobile 
+    // view by toggling the button
     const onClcik = function () {
       if (toggleNavRef.current.classList.contains("active")) {
         toggleNavRef.current.classList.remove("active");

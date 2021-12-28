@@ -35,6 +35,10 @@ const Groups = (props) => {
     const [userSearched, setUserSearched] = useState(false);
 
     const onValueChange = (event) => {
+
+        // As both contact and group pop up 
+        // can be opened on the same screen, 
+        //differentiating to make the accordingly.
         if(componentName === "Contact")
         {
             setContactDetails({...contactDetails, [event.target.name]: event.target.value});
@@ -120,10 +124,16 @@ const Groups = (props) => {
         conatactRef.current.style.display = "block"; 
     }
 
-    const onGroupEdit = (index) => {    
+    const onGroupEdit = (index) => {
+        //Updating component based on the user selection
+        //as user has clicked on edit on group, setting the 
+        //component as Group component pop up    
         setComponentName("Group"); 
+
+        // setting detail to display on the pop up field
         setGroupDetails({...groupDetails, groupName: groups[index].groupName, description: groups[index].description})
         setGroupIndex(index)
+        // display pop up
         conatactRef.current.style.display = "block"; 
     }
 
@@ -155,7 +165,7 @@ const Groups = (props) => {
         conatactRef.current.style.display = "none"; 
     }
   
-
+    // Added debouncing search functionality
     const onSearch = debounceSearch((inputEvent) => {
         setUserSearched(true);
         searchGroupApi(inputEvent.target.value)

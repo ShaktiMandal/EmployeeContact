@@ -17,7 +17,7 @@ const Contacts = () => {
         error: ""
     }
     
-    let conatactRef = React.useRef(null);
+    const conatactRef = React.useRef(null);
     const[contactDetails, setContactDetails] = useState(initializeContacts);
     const [contacts, setContacts] = useState([]);
     const [selectedIndex, setIndex] = useState(-1);
@@ -27,8 +27,14 @@ const Contacts = () => {
 
         if(localStorage.getItem("Groups"))
         {
+            // If tere is any contact present in the 
+            //storage then just display on the sceen/
             let contacts = [];
             let groups = JSON.parse(localStorage.getItem("Groups") || "[]");
+
+            //Taking each group , getiing the contact list from that group
+            //then concatinating it to make it one array which will be used to 
+            // display on the screen
             groups.forEach(group => {
                 if(group.contacts !== undefined && group.contacts.length > 0)
                 {
@@ -40,12 +46,19 @@ const Contacts = () => {
             setContacts(contacts);
 
         }
-        
+        // This is to make sure that there is no 
+        //pop when navigating to the screen
+        // display pop up only when asked to display
+        //used useRef to access the dom.
         conatactRef.current.style.display = "none";
         
     }, [])
 
+    //Created debouncing function tlo improve serach 
+    //functionlity/
     const onSearch = debounceSearch((event) => {
+        //updated the value if user used search functionality
+        //based on this, have to displau search panel on the screen.
         setUserSearched(true);
         searchContactApi(event.target.value)
         .then(result => {
@@ -92,10 +105,13 @@ const Contacts = () => {
 
     const onConatctEdit = (index) => {
 
+        //display the data when opening the pop up on edit mode.
         setContactDetails({...contactDetails, 
             email: contacts[index].email, 
             phoneNumber: contacts[index].phoneNumber});
+        //setting the slected item index
         setIndex(index);
+        //display pop up to edit the item
         conatactRef.current.style.display = "block";        
     }
 
@@ -136,7 +152,9 @@ const Contacts = () => {
     }
 
     const onCloseButton =() => {
+        // clearing all data by initializing it
         setContactDetails(initializeContacts);
+        // closing the pop up
         conatactRef.current.style.display = "none";
     }
 
@@ -145,7 +163,7 @@ const Contacts = () => {
     }
 
     return (
-        <div>
+        <div>            
             {contacts.length > 0 || userSearched ? <SearchPanel placeholder= "Search contact - email/phone number" onSearch = {onSearch}/> : null }
             <div className={classes.displayGroup}> 
                 {

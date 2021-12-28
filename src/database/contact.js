@@ -19,7 +19,6 @@ var contactDB = (function() {
 
             let result = [];
             let groups = groupDB().getGroups();
-            console.log("In search db", groups)
             groups.forEach(element => {
                 if(element.contacts !== undefined && element.contacts.length > 0)
                 {
@@ -34,7 +33,6 @@ var contactDB = (function() {
                 }
                 
             });
-            console.log("In search db result", result);
             return result;
         }
 
@@ -43,6 +41,8 @@ var contactDB = (function() {
             let groups = groupDB().getGroups();
             let matchIndex = groups.findIndex(item => item.groupId === grpId);
             groups[matchIndex].contacts.push(contactDetails);
+
+            //Storing data in localstorage
             if(localStorage.getItem("Groups"))
             {
                 localStorage.setItem("Groups", JSON.stringify(groups));

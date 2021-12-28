@@ -1,3 +1,10 @@
+//This is all about validating the data
+
+
+// This is field level validation
+// for example - email , password
+// input - field name and field value
+// output - error message (if there is any) / empty string (if no error)
 const fieldLevelValidation = () => {
   return function (fieldName, value) {
     let errorMessage = "";
@@ -28,6 +35,11 @@ const fieldLevelValidation = () => {
 };
 
 
+// This is form level validation
+// for example - Add group / sign in / register
+// input - fall form data as an object
+// output - error message (if there is any) / empty string (if no error)
+
 const formLevelValidation = () => {
 
     return function(data)
@@ -44,6 +56,7 @@ const formLevelValidation = () => {
               let message = fieldValidation(item, data[item]);
               if(message.length > 0)
               {
+                //here appending "/ " between two error message
                 errorMessages += " / " + message;
               }
             }  
@@ -62,6 +75,7 @@ const getErrorMsgForEmail = (email) => {
     }
     if(!email.includes("@inmar.com"))
     {
+      // this is specific check to validate inmar.com domain present or not
       return "Invalid email, should have @inmar.com"
     }
     if(regexp.test(email))
@@ -148,6 +162,11 @@ const getErrorMsgForOther = (value, fieldName) => {
 
     return value.length > 0 || value === undefined ? "" : `${fieldName} Value should not be empty`;
 }
+
+
+//Just rtaking the reference the function
+//thus, no need to create reference every time function
+//call happen, reduce memory optimization
 
 const fieldValidation = fieldLevelValidation();
 const formValidation = formLevelValidation();
