@@ -1,0 +1,33 @@
+@import 'config';
+
+.searchpanel
+{
+    @include displayFlex(row, center, center);
+    height: 100px;    
+    padding-bottom: 20px;
+
+    input{
+        background: none;
+        border: 2px solid $primary-border-color;
+        border-radius: 25px;
+        padding-left: 10px;
+        outline: none;
+        transition: 0.25s;
+        text-align: center;
+        color: black;
+        height: 30px;
+        width: 50%;
+
+        &:focus{
+            width: 50%;
+            border-color: $border-focus-color; 
+        }
+    }
+}
+
+@media screen and (max-width: 1000px)
+{
+    .searchpanel input{
+        width: 40%;
+    }
+}

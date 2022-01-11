@@ -1,0 +1,57 @@
+$primary-btn-color: #ffffff;
+$btn-hover-color: #e01a1a;
+$btn-action-color: #af2424;
+
+$primary-border-color: #3498db;
+$border-focus-color: #2ecc71;
+
+$primary-bg-color: #1a0000;
+$primary-text-color: #ffffff;
+$danger-text-color: #ff0000;
+$warning-text-color: #0040ff;
+
+@mixin displayFlex($display-direction, $items-allignment, $content-allignment) {
+  display: flex;
+  align-items: $items-allignment;
+  justify-content: $content-allignment;
+}
+
+@mixin appButton {
+  display: inline-block;
+  padding: 0.7rem 1.25rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: none;
+  outline: none;
+}
+
+@mixin appButtonAfter {
+  content: "";
+  color: black;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -2;
+}
+
+@mixin appButtonBefore {
+  content: "";
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--clr-red);
+  transition: all 0.3s;
+  z-index: -1;
+}

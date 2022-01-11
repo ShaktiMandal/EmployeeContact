@@ -1,0 +1,42 @@
+@import 'config';
+
+.createContact
+{
+    @include displayFlex(row, center, center);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100vh;
+    z-index: 4;
+}
+
+.displayGroup {
+    @include displayFlex(row, center, center);
+    overflow: hidden;
+}
+
+.usergroups
+{
+    width: 70%;
+    height: 300px;
+    overflow-y: auto;
+    li{
+        list-style: none;
+    }
+}
+
+.groupSection
+{
+    height: 100vh;
+}
+
+
+@media screen and (max-width: 800px)
+{
+    .usergroups
+    {
+        width: 90%;
+    }
+}

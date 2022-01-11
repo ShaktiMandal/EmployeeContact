@@ -35,7 +35,7 @@ const SignIn = (props) => {
                     </div>
                     <div className={classes.HyperLinkItem}>
                         <div className={classes.SignUpLink}>
-                            Don't have accunt ?<Hyperlink className={classes.SignUp} LinkedTo='/register'> Sign up </Hyperlink>
+                            Don't have account ?<Hyperlink className={classes.SignUp} LinkedTo='/register'> Sign up </Hyperlink>
                         </div>
                     </div>      
                     <div className={classes.loginbtndiv}>

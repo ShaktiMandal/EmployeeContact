@@ -1,102 +1,121 @@
-h4{
-    font-size: 15px;
-    font-weight: normal;
-    color: var(--clr-red);
+h4 {
+  font-size: 15px;
+  font-weight: normal;
+  color: #ff0000;
 }
 
-.logInform
-{
-    position: relative;
-    background-color: rgb(26, 24, 24);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) ;
-    display: grid;
-    place-items: center;
-    width: 30%;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px 5px rgb(78, 75, 75);
-    text-align: center;
-    color: var(--clr-form-bg);
+.logInform {
+  position: relative;
+  background-color: #1a1818;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  width: 30%;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  color: var(--clr-form-bg);
 }
 
-.logInform div{
-    width: 80%;
-    margin-bottom: 10px;
+.logInform div {
+  width: 80%;
+  margin-bottom: 10px;
 }
 
-.logInform h5{
-    margin-bottom: 10px;
+.logInform h5 {
+  margin-bottom: 10px;
 }
+
+.logInform:hover {
+  -webkit-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+  -webkit-box-shadow: 0 0 5px 5px #4e4b4b;
+          box-shadow: 0 0 5px 5px #4e4b4b;
+}
+
 .logInBtn {
-    display: inline-block;
-    padding: .75rem 1.25rem;
-    border-radius: 10rem;
-    font-size: 1rem;
-    letter-spacing: .15rem;
-    transition: all .3s;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    border: none;
-    outline: none;
-}
-    .logInBtn::after {
-      content: '';
-      color: black;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      border-radius: 10rem;
-      z-index: -2;
-    }
-    .logInBtn::before {
-      content: '';
-      position: absolute;   
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 100%;
-      background-color: var(--clr-red);
-      transition: all .3s;
-      border-radius: 10rem;
-      z-index: -1;
-    }
-    .logInBtn:hover {
-      color: #fff;
-      cursor: pointer;
-    }
-    .logInBtn:hover::before {
-        width: 100%;
-      }
- 
-.loginbtndiv
-{
-    display: grid;
-    place-items: center;
+  display: inline-block;
+  padding: .7rem 1.25rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: none;
+  outline: none;
 }
 
-.HyperLinkItem
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px;
+.logInBtn::after {
+  content: '';
+  color: black;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -2;
 }
 
-@media screen and (max-width: 800px)
-{
-    .logInform
-    {
-        width: 70%;
-    }
-
-    .logInform div{
-        width: 90%;
-    }
-    
+.logInBtn::before {
+  content: '';
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--clr-red);
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  z-index: -1;
 }
+
+.logInBtn:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.logInBtn:hover::before {
+  width: 100%;
+}
+
+.logInBtn:active::before {
+  background-color: #af2424;
+}
+
+.loginbtndiv {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.HyperLinkItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  .logInform {
+    width: 70%;
+  }
+  .logInform div {
+    width: 90%;
+  }
+}
+/*# sourceMappingURL=authentication.module.css.map */

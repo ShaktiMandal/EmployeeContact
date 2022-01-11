@@ -1,0 +1,75 @@
+@import "config";
+
+h4 {
+  font-size: 15px;
+  font-weight: normal;
+  color: $danger-text-color;
+}
+
+.logInform {
+  position: relative;
+  background-color: rgb(26, 24, 24);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 30%;
+  padding: 10px;
+  border-radius: 5px;
+
+  text-align: center;
+  color: var(--clr-form-bg);
+  div {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+  h5 {
+    margin-bottom: 10px;
+  }
+  &:hover {
+    transition: all 0.6s ease-in-out;
+    box-shadow: 0 0 5px 5px rgb(78, 75, 75);
+  }
+}
+
+.logInBtn {
+    @include appButton;
+  &::after {
+    @include appButtonAfter
+  }
+  &::before {
+    @include appButtonBefore
+  }
+
+  &:hover {
+    color: #fff;
+    cursor: pointer;
+  }
+  &:hover::before {
+    width: 100%;
+  }
+  &:active::before{
+    background-color: $btn-action-color;
+  }
+}
+
+.loginbtndiv {
+  display: grid;
+  place-items: center;
+}
+
+.HyperLinkItem {
+  @include displayFlex(row, center, space-around);
+  padding: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  .logInform {
+    width: 70%;
+  }
+
+  .logInform div {
+    width: 90%;
+  }
+}

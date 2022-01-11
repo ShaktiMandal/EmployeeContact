@@ -1,0 +1,16 @@
+@import 'config';
+
+.LinkStyle
+{
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    color: red;
+    &:focus{
+        color: limegreen;
+    }
+    &:active{
+        color: green;
+    }
+}

@@ -4,6 +4,9 @@ import classes from '../style/Input.module.css';
 
 const Input = (props) =>{
     
+    //made dynamically input emlement so that 
+    //any one use it for the own purpose by
+    //passign the respective props details
     return (
         <input
         name = {props.name}
@@ -21,6 +24,7 @@ const Input = (props) =>{
         value= {props.inputValue}   
         id = {props.id}  
         className={classes.InputStyle}
+        autoComplete="off"
         />
     )
 }

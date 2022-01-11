@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,YAAY,CACZ;ECWI,OAAO,EAAE,IAAI;EACb,WAAW,EDXe,MAAM;ECYhC,eAAe,EDZmB,MAAM;EACxC,QAAQ,EAAE,KAAK;EACf,GAAG,EAAE,CAAC;EACN,IAAI,EAAE,CAAC;EACP,gBAAgB,EAAE,kBAAe;EACjC,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,KAAK;EACb,OAAO,EAAE,CAAC;CACb",
+    "sources": [
+        "home.module.scss",
+        "_config.scss"
+    ],
+    "names": [],
+    "file": "home.module.css"
+}
