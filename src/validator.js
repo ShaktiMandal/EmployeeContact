@@ -73,10 +73,10 @@ const getErrorMsgForEmail = (email) => {
     {
       return "Please enter email id"
     }
-    if(!email.includes("@inmar.com"))
+    if(!email.includes("@test.com"))
     {
-      // this is specific check to validate inmar.com domain present or not
-      return "Invalid email, should have @inmar.com"
+      // this is specific check to validate test.com domain present or not
+      return "Invalid email, should have @test.com"
     }
     if(regexp.test(email))
     {

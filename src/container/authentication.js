@@ -88,7 +88,7 @@ const Authentication = () => {
                                 lastNameId="lastNameId"
                                 adharId="adharId"
                                 isRequired="true" 
-                                emailPlaceholder = "example@inmar.com"    
+                                emailPlaceholder = "example@test.com"    
                                 passwordPlaceholder = "Enter password" 
                                 firstNamePlaceholder = "Enter first name"    
                                 lastNamePlaceholder = "Enter last name"  
@@ -108,7 +108,7 @@ const Authentication = () => {
             renderScreen =    <SignIn emailId="emailId" 
                                 passwordId="password"
                                 isRequired="true" 
-                                emailPlaceholder = "example@inmar.com"    
+                                emailPlaceholder = "example@test.com"    
                                 passwordPlaceholder = "Enter password"    
                                 onValueChange={onValueChange} 
                                 onSignIn={onSignIn} 
